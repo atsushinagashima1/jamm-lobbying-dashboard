@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JAMM 条例ロビイング ダッシュボード</title>
 <style>
@@ -85,6 +86,32 @@
 </style>
 </head>
 <body>
+<div id="gate" style="position:fixed;inset:0;background:#0F1117;z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="text-align:center;">
+    <div style="font-size:14px;color:#8B92A5;margin-bottom:12px;">JAMM Internal Dashboard</div>
+    <input id="pw" type="password" placeholder="パスワード" 
+      style="background:#1A1D27;border:1px solid #2E3240;color:#E0E4EC;padding:10px 16px;border-radius:8px;font-size:14px;width:200px;text-align:center;"
+      onkeydown="if(event.key==='Enter')checkPw()">
+    <div style="margin-top:8px;">
+      <button onclick="checkPw()" style="background:#4A9EF5;color:#fff;border:none;padding:8px 24px;border-radius:6px;cursor:pointer;font-size:13px;">Enter</button>
+    </div>
+    <div id="pwErr" style="color:#EF4444;font-size:12px;margin-top:8px;display:none;">incorrect</div>
+  </div>
+</div>
+<script>
+function checkPw(){
+  // simple hash check (not crypto-secure, but prevents casual access)
+  var v=document.getElementById('pw').value;
+  if(btoa(v)==='amFtbTIwMjY='){
+    document.getElementById('gate').style.display='none';
+    sessionStorage.setItem('authed','1');
+  } else {
+    document.getElementById('pwErr').style.display='block';
+  }
+}
+if(sessionStorage.getItem('authed')==='1') document.addEventListener('DOMContentLoaded',function(){document.getElementById('gate').style.display='none';});
+</script>
+
 <div class="wrapper">
   <div class="header">
     <div class="header-left">
